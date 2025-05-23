@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class TripService {
@@ -20,5 +21,9 @@ public class TripService {
 
     public ResponseEntity<List<Trip>> getTripsByLocation(String location) {
         return new ResponseEntity<>(tripRepository.findAllByLocation(location), HttpStatus.OK);
+    }
+
+    public ResponseEntity<Optional<Trip>> getTripById(int id) {
+        return new ResponseEntity<>(tripRepository.findById(id), HttpStatus.OK);
     }
 }

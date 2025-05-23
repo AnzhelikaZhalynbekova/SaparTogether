@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Optional;
+
 @RestController
 @RequestMapping("trip")
 public class TripController {
@@ -24,5 +26,10 @@ public class TripController {
     @GetMapping("trips/{location}")
     public ResponseEntity<List<Trip>> getTripsByLocation(@PathVariable String location) {
         return tripService.getTripsByLocation(location);
+    }
+
+    @GetMapping("trip/{id}")
+    public ResponseEntity<Optional<Trip>> getTripById(@PathVariable int id) {
+        return tripService.getTripById(id);
     }
 }
