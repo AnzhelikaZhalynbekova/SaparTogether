@@ -13,7 +13,12 @@ import java.util.List;
 public class TripService {
     @Autowired
     TripRepository tripRepository;
+
     public ResponseEntity<List<Trip>> getAllTrips() {
         return new ResponseEntity<>(tripRepository.findAll(), HttpStatus.OK);
+    }
+
+    public ResponseEntity<List<Trip>> getTripsByLocation(String location) {
+        return new ResponseEntity<>(tripRepository.findAllByLocation(location), HttpStatus.OK);
     }
 }
