@@ -30,4 +30,13 @@ public class TripService {
     public ResponseEntity<Trip> createTrip(Trip trip) {
         return new ResponseEntity<>(tripRepository.save(trip), HttpStatus.CREATED);
     }
+
+    public ResponseEntity<Trip> updateTrip(Trip trip) {
+        return new ResponseEntity<>(tripRepository.save(trip), HttpStatus.OK);
+    }
+
+    public ResponseEntity<String> deleteTrip(int id) {
+        tripRepository.deleteById(id);
+        return new ResponseEntity<>("Trip deleted", HttpStatus.OK );
+    }
 }

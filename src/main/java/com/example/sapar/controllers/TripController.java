@@ -34,4 +34,14 @@ public class TripController {
     public ResponseEntity<Trip> createTrip(@RequestBody Trip trip) {
         return tripService.createTrip(trip);
     }
+
+    @PutMapping("update")
+    public ResponseEntity<Trip> updateTrip(@RequestBody Trip trip) {
+        return tripService.updateTrip(trip);
+    }
+
+    @DeleteMapping("delete/{id}")
+    public ResponseEntity<String> deleteTrip(@PathVariable int id) {
+        return tripService.deleteTrip(id);
+    }
 }
