@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,27 +17,58 @@ public class TripService {
     TripRepository tripRepository;
 
     public ResponseEntity<List<Trip>> getAllTrips() {
-        return new ResponseEntity<>(tripRepository.findAll(), HttpStatus.OK);
+        try {
+            return new ResponseEntity<>(tripRepository.findAll(), HttpStatus.OK);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return new ResponseEntity<>(new ArrayList<>(), HttpStatus.BAD_REQUEST);
     }
 
     public ResponseEntity<List<Trip>> getTripsByLocation(String location) {
-        return new ResponseEntity<>(tripRepository.findAllByLocation(location), HttpStatus.OK);
+        try{
+            return new ResponseEntity<>(tripRepository.findAllByLocation(location), HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return new ResponseEntity<>(new ArrayList<>(), HttpStatus.BAD_REQUEST);
     }
 
     public ResponseEntity<Optional<Trip>> getTripById(int id) {
-        return new ResponseEntity<>(tripRepository.findById(id), HttpStatus.OK);
+        try{
+            return new ResponseEntity<>(tripRepository.findById(id), HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return new ResponseEntity<>(Optional.empty(), HttpStatus.BAD_REQUEST);
     }
 
     public ResponseEntity<Trip> createTrip(Trip trip) {
-        return new ResponseEntity<>(tripRepository.save(trip), HttpStatus.CREATED);
+        try{
+            return new ResponseEntity<>(tripRepository.save(trip), HttpStatus.CREATED);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
     }
 
     public ResponseEntity<Trip> updateTrip(Trip trip) {
-        return new ResponseEntity<>(tripRepository.save(trip), HttpStatus.OK);
+        try{
+            return new ResponseEntity<>(tripRepository.save(trip), HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
     }
 
     public ResponseEntity<String> deleteTrip(int id) {
-        tripRepository.deleteById(id);
-        return new ResponseEntity<>("Trip deleted", HttpStatus.OK );
+        try{
+            tripRepository.deleteById(id);
+            return new ResponseEntity<>("Trip deleted", HttpStatus.OK );
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return new ResponseEntity<>("Can't delete", HttpStatus.BAD_REQUEST);
     }
 }
