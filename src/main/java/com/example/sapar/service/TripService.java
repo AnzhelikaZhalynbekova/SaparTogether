@@ -26,4 +26,8 @@ public class TripService {
     public ResponseEntity<Optional<Trip>> getTripById(int id) {
         return new ResponseEntity<>(tripRepository.findById(id), HttpStatus.OK);
     }
+
+    public ResponseEntity<Trip> createTrip(Trip trip) {
+        return new ResponseEntity<>(tripRepository.save(trip), HttpStatus.CREATED);
+    }
 }
