@@ -33,6 +33,7 @@ public class SecurityConfiguration {
                         .requestMatchers("/auth/**", "/h2-console/**").permitAll()
                         .anyRequest().authenticated()
                 )
+                .headers(headers -> headers.frameOptions(frameOptions -> frameOptions.disable()))
                 .sessionManagement(session -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider())
@@ -57,5 +58,17 @@ public class SecurityConfiguration {
     public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
         return config.getAuthenticationManager();
     }
+
+//    @Bean
+//    public UserDetailsService userDetailsService() {
+//        UserDetails user = User.builder()
+//                .username("user")
+//                .password("password")
+//                .passwordEncoder(passwordEncoder()::encode)
+//                .roles("USER")
+//                .build();
+//
+//        return new InMemoryUserDetailsManager(user);
+//    }
 
 }

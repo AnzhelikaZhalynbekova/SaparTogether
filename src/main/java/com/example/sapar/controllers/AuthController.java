@@ -2,6 +2,7 @@ package com.example.sapar.controllers;
 
 import com.example.sapar.Dtos.LoginRequest;
 import com.example.sapar.Dtos.RegisterRequest;
+import com.example.sapar.config.CustomUserDetails;
 import com.example.sapar.jwt.JwtService;
 import com.example.sapar.entities.User;
 import com.example.sapar.repositories.UserRepository;
@@ -10,6 +11,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
@@ -37,13 +40,23 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<String> loginUser(@RequestBody LoginRequest loginRequest) {
-        Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword())
-        );
-        User user = userRepository.findByUsername(loginRequest.getUsername()).orElse(null);
-        String jwt = jwtService.generateToken(user);
-        return ResponseEntity.ok("Successfully logged in");
+    public ResponseEntity<?> loginUser(@RequestBody LoginRequest loginRequest) {
+        try {
+            Authentication authentication = authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(
+                            loginRequest.getUsername(),
+                            loginRequest.getPassword())
+            );
+            SecurityContextHolder.getContext().setAuthentication(authentication);
+            CustomUserDetails userDetails = (CustomUserDetails)  authentication.getPrincipal();
+//        User user = userRepository.findByUsername(loginRequest.getUsername()).orElse(null);
+            String jwt = jwtService.generateToken(userDetails);
+            return ResponseEntity.ok("token: " + jwt);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw e;
+        }
+
     }
 
 }

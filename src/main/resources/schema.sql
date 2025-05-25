@@ -26,9 +26,9 @@ CREATE TABLE users (
                        role VARCHAR(20) DEFAULT 'USER'
 );
 
-INSERT INTO users (username, email, password, enabled, role)
-VALUES ('test_user1', 'test1@example.com', 'test_password_1', TRUE, 'USER');
-
-INSERT INTO users (username, email, password, enabled, role)
-VALUES ('test_user2', 'test2@example.com', 'test_password_2', TRUE, 'USER');
+-- INSERT INTO users (username, email, password, enabled, role)
+-- VALUES ('test_user1', 'test1@example.com', 'test_password_1', TRUE, 'USER');
+--
+-- INSERT INTO users (username, email, password, enabled, role)
+-- VALUES ('test_user2', 'test2@example.com', 'test_password_2', TRUE, 'USER');
 
