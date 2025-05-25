@@ -2,6 +2,7 @@ package com.example.sapar.controllers;
 
 import com.example.sapar.Dtos.LoginRequest;
 import com.example.sapar.Dtos.RegisterRequest;
+import com.example.sapar.jwt.JwtService;
 import com.example.sapar.entities.User;
 import com.example.sapar.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -10,7 +11,6 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -21,6 +21,7 @@ public class AuthController {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authenticationManager;
+    private final JwtService jwtService;
 
     @PostMapping("/register")
     public ResponseEntity<String> registerUser(@RequestBody RegisterRequest registerRequest) {

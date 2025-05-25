@@ -15,3 +15,20 @@ INSERT INTO Trip (name, location, start_date, end_date, budget, peoplenum, descr
       ('Island Retreat', 'Maldives', '2025-08-15', '2025-08-22', 2500, 3, 'Relax on the beaches and enjoy island life.', 'https://chat.group/maldives'),
       ('City Lights Tour', 'New York', '2025-09-01', '2025-09-10', 1800, 5, 'Experience the best of NYC nightlife and attractions.', 'https://chat.group/nyc'),
       ('Desert Camping', 'Dubai', '2025-10-05', '2025-10-12', 900, 6, 'Spend a week camping in the Arabian desert.', 'https://chat.group/dubai');
+
+
+CREATE TABLE users (
+                       id SERIAL PRIMARY KEY,
+                       username VARCHAR(50) UNIQUE NOT NULL,
+                       email VARCHAR(100) UNIQUE NOT NULL,
+                       password VARCHAR(255) NOT NULL,
+                       enabled BOOLEAN DEFAULT TRUE,
+                       role VARCHAR(20) DEFAULT 'USER'
+);
+
+INSERT INTO users (username, email, password, enabled, role)
+VALUES ('test_user1', 'test1@example.com', 'test_password_1', TRUE, 'USER');
+
+INSERT INTO users (username, email, password, enabled, role)
+VALUES ('test_user2', 'test2@example.com', 'test_password_2', TRUE, 'USER');
+
