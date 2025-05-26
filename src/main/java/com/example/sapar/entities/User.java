@@ -55,7 +55,7 @@ public class User {
     }
 
     public boolean isEnabled() {
-        return enabled;
+        return true;
     }
 
     public void setEnabled(boolean enabled) {
