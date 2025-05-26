@@ -22,6 +22,11 @@ public class User {
     private boolean enabled;
     private String role="ROLE_USER";
 
+    private Integer age;
+    private String gender;
+    private String photo;
+
+
     public String getPassword() {
         return password;
     }

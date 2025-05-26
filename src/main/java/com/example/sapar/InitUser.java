@@ -22,6 +22,9 @@ public class InitUser implements CommandLineRunner {
                 .password(passwordEncoder.encode("123456"))
                 .enabled(true)
                 .role("USER")
+                .age(24)
+                .gender("Male")
+                .photo("https://example.com/photo.jpg")
                 .build();
 
         User admin = User.builder()
@@ -30,6 +33,9 @@ public class InitUser implements CommandLineRunner {
                 .password(passwordEncoder.encode("123456"))
                 .enabled(true)
                 .role("USER")
+                .age(24)
+                .gender("Male")
+                .photo("https://example.com/photo.jpg")
                 .build();
 
         userRepository.save(user);

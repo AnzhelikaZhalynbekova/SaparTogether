@@ -23,7 +23,10 @@ CREATE TABLE users (
                        email VARCHAR(100) UNIQUE NOT NULL,
                        password VARCHAR(255) NOT NULL,
                        enabled BOOLEAN DEFAULT TRUE,
-                       role VARCHAR(20) DEFAULT 'USER'
+                       role VARCHAR(20) DEFAULT 'USER',
+                       age INT,
+                       gender VARCHAR(20),
+                       photo VARCHAR(255)
 );
 
 -- INSERT INTO users (username, email, password, enabled, role)
